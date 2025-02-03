@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  sakila-postgres:
+    image: postgres:16
+    # Apple Silicon Mac 사용시 아래 platform 주석 해제
+    # platform: linux/amd64
+    volumes:
+      - sakila_volume:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: passwd
+      POSTGRES_DB: sakila
+    command:
+      - "postgres"
+      - "-c"
+      - "default_text_search_config=pg_catalog.simple"
+
+volumes:
+  sakila_volume:
